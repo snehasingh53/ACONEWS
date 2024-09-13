@@ -19,7 +19,7 @@ const API_KEY = process.env.API_KEY;
 // Helper function for API requests
 async function makeApiRequest(url) {
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(url, { timeout: 10000 });
     return {
       status: 200,
       success: true,

@@ -18,7 +18,7 @@ export default function TopHeadlines() {
   function handleNext() {
     setPage(prevPage => Math.min(prevPage + 1, Math.ceil(totalResults / pageSize))); // Ensure page doesn't exceed total pages
   }
-
+  const API_URL = import.meta.env.VITE_API_URL;
   const pageSize = 6;
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function TopHeadlines() {
     setError(null);
 
     const categoryParam = params.category ? `&category=${params.category}` : "";
-    fetch(`http://localhost:3000/top-headlines?&lang=en${categoryParam}&page=${page}&pageSize=${pageSize}`)
+    fetch(`${API_URL}/top-headlines?&lang=en${categoryParam}&page=${page}&pageSize=${pageSize}`)
       .then((response) => {
         if (response.ok) {
           return response.json();

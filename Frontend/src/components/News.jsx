@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import Card from './Card';
 import Loader from './Loader';
@@ -10,6 +9,8 @@ function News() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   function handlePrev() {
     setPage(page - 1);
   }
@@ -18,13 +19,13 @@ function News() {
     setPage(page + 1);
   }
 
-  let pageSize = 12;
+  const pageSize = 12;
 
   useEffect(() => {
     setIsLoading(true);
     setError(null);
 
-    fetch(`http://localhost:3000/?page=${page}&pageSize=${pageSize}`)
+    fetch(`${API_URL}/?page=${page}&pageSize=${pageSize}`)
       .then(response => {
         if (response.ok) {
           return response.json();
